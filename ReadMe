@@ -1,0 +1,104 @@
+UNO Game - Java Implementation
+
+This project is a Java-based implementation of the popular card game UNO. The game is designed to play bots. The implementation includes all the standard rules of UNO, including special cards like Skip, Reverse, Draw 2, Wild, and Wild Draw 4.
+
+Project Structure
+
+The project is organized into several Java classes, each responsible for different aspects of the game. Below is an overview of the classes and their functionalities:
+
+1. Main.java :
+
+    Purpose: The entry point of the application.
+    Methods:
+     - main(String[] args): Starts the game by calling Play.startGame().
+     - handleChoice(): Handles user input for choices during the game.
+
+2. Play.java :
+
+     Purpose: Manages the game flow, including player turns, card plays, and game state.
+     Methods:
+     - startGame(): Initializes the game, sets up players, shuffles the deck, and starts the game loop.
+     - setColorToPlay(String color): Sets the color to be played in the next turn.
+     - activateSkip(): Activates the skip effect, causing the next player to lose their turn.
+     - setTurnReversed(boolean bool): Reverses the turn order if the Reverse card is played.
+     - getBotCount(): Returns the number of bots in the game.
+
+3. Player.java : 
+
+     Purpose: Abstract class representing a player in the game. Both User and Bot classes extend this class.
+     Methods:
+     - playCard(String colorToPlay): Abstract method to play a card. Implemented in User and Bot classes.
+
+4. User.java :
+
+     Purpose: Represents the human player in the game.
+     Methods:
+     - playCard(String colorToPlay): Allows the user to select and play a card from their hand. Handles special cards like Wild and Wild Draw 4.
+
+5. Bot.java :
+
+     Purpose: Represents a bot player in the game.
+     Methods:
+     - generateBots(int total): Generates an array of bot players with unique names.
+     - playCard(String colorToPlay): Automatically selects and plays a card from the bot's hand. Handles special cards like Skip, Reverse, and Draw 2.
+     - printBotNames(Bot[] bots): Prints the names of all bot players.
+
+6. Card.java :
+
+     Purpose: Abstract class representing a card in the game. Extended by NumberCard, ActionCard, and WildCard.
+     Methods:
+     - isPlayable(Card topDiscardPile, String colorToPlay): Abstract method to check if a card is playable.
+     - play(Player player): Abstract method to play the card.
+     - printCard(Card card): Prints the details of the card.
+
+ 7. NumberCard.java : 
+
+     Purpose: Represents a numbered card in the game.
+     Methods:
+     - isPlayable(Card topDiscardPile, String colorToPlay): Checks if the card is playable based on the top card of the discard pile and the current color to play.
+     - play(Player player): Plays the card by moving it to the discard pile and setting the next color to play.
+     - getCards(): Generates all numbered cards for the deck.
+
+8. ActionCard.java :
+
+     Purpose: Represents action cards like Skip, Reverse, and Draw 2.
+     Methods:
+     - isPlayable(Card topDiscardPile, String colorToPlay): Checks if the card is playable based on the top card of the discard pile and the current color to play.
+     - play(Player player): Plays the card by moving it to the discard pile and setting the next color to play.
+     - playReverse(): Reverses the turn order.
+     - playSkip(): Skips the next player's turn.
+     - playDraw2(Player player): Forces the next player to draw 2 cards and lose their turn.
+     - getCards(): Generates all action cards for the deck.
+
+9. WildCard.java :
+
+     Purpose: Represents Wild and Wild Draw 4 cards.
+     Methods:
+     - isPlayable(Card topDiscardPile, String colorToPlay): Wild cards are always playable.
+     - play(Player player): Plays the card by moving it to the discard pile.
+     - playWild(Player player): Allows the player to choose the next color to play.
+     - playWildDraw4(Player player, String colorToPlay): Forces the next player to draw 4 cards and allows the current player to choose the next color.
+     - attemptPlayWildDraw4(Player player, String colorToPlay): Handles the logic for playing a Wild Draw 4 card, including challenges.
+     - userChooseColor(): Allows the user to choose a color.
+     - botChooseColor(Bot bot): Allows the bot to choose a color based on the cards in its hand.
+     - getCards(): Generates all Wild cards for the deck.
+
+10. Deck.java :
+
+      Purpose: Manages the deck of cards.
+      Methods:
+      - getDeck(): Generates and returns a shuffled deck of cards.
+      - shuffle(Stack<Card> deck): Shuffles the deck.
+ 
+11. PlayMethods.java :
+
+      Purpose: Contains helper methods for game operations.
+      Methods:
+      - dealCards(Player currentPlayer): Deals 7 cards to each player.
+      - displayHand(Player player): Displays the cards in a player's hand.
+      - drawCards(int quantity, Player player): Draws a specified number of cards for a player.
+      - startDiscardPile(Stack<Card> drawPile, Stack<Card> discardPile): Initializes the discard pile.
+      - scanPlayableCards(Player player, Card topDiscardPile, String colorToPlay): Scans the player's hand for playable cards.
+      - printDeckStats(): Prints the current state of the deck and discard pile.
+      - checkWinner(Player player): Checks if a player has won the game.
+
